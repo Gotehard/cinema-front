@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../../shared/services/auth.service";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-sign-in',
@@ -8,20 +9,17 @@ import {AuthService} from "../../shared/services/auth.service";
 })
 export class SignInComponent {
 
-  login = 'q';
-  password = 'q2we';
+  loginForm = new FormGroup({
+    username: new FormControl('q'),
+    password: new FormControl('q2we')
+  })
   constructor(
+    private fb: FormBuilder,
     private authService: AuthService
   ) { }
 
-  signIn(){
-    if (!this.login && !this.password){
-      return
-    }
-    this.authService.login({
-      username: this.login,
-      password: this.password
-    })
+  onSubmit(){
+    this.authService.login(this.loginForm.value)
   }
 
 }

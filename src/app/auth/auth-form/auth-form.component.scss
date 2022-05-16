@@ -1,5 +1,5 @@
 section {
-  width: 100%;
+  //width: 100%;
   display: flex;
   justify-content: center;
   margin: 30px;
@@ -10,8 +10,13 @@ section {
     box-shadow: #5555 2px 2px;
     padding: 50px 30px;
 
+    form {
+      display: flex;
+      flex-direction: column;
 
-    label {
+      label {
+      }
+
       input {
         border: none;
         border-bottom: #555 1px solid;
