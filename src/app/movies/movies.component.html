@@ -1,0 +1,12 @@
+<p>movies works!</p>
+<div class="movie-list">
+  <div *ngFor="let movie of moviesService.movies |async">
+    <p class="movie">
+      id: {{movie.id}} <br>
+      nazwa : {{movie.title}} <br>
+      opis: {{movie.description}} <br>
+      reżyser: {{movie.director}} <br>
+      Czas trwania {{movie.duration}}
+    </p>
+  </div>
+</div>
