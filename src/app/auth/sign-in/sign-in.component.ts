@@ -13,13 +13,19 @@ export class SignInComponent {
     username: new FormControl('q'),
     password: new FormControl('q2we')
   })
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService
-  ) { }
+  ) {
+  }
 
-  onSubmit(){
+  onSubmit() {
     this.authService.login(this.loginForm.value)
+  }
+
+  ref() {
+    this.authService.refreshToken();
   }
 
 }

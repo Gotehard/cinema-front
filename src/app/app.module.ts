@@ -6,7 +6,8 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {MainMenuComponent} from './layout/main-menu/main-menu.component';
 import {SiteNotFoundComponent} from './shared/components/site-not-found/site-not-found.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {HttpClientModule} from "@angular/common/http";
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   exports: [],
   bootstrap: [AppComponent]
 })
