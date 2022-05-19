@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MoviesService} from "./movies.service";
 
 @Component({
@@ -12,6 +12,10 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit(): void {
     this.moviesService.getMoviesList();
+    this.moviesService.movies$
+      .subscribe(d => {
+        console.log('FILMY', d);
+      })
   }
 
 }
