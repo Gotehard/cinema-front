@@ -1,1 +1,16 @@
-<p>sign-in works!</p>
+<app-auth-form>
+  <form [formGroup]="loginForm" (submit)="onSubmit()">
+    <label for="username">
+      Login:
+    </label>
+    <input id="username" type="text" formControlName="username">
+    <br>
+    <label for="password">
+      Password:
+    </label>
+    <input id="password" type="text" formControlName="password">
+    <br>
+    <button type="submit">Sign in</button>
+  </form>
+</app-auth-form>
+<button (click)="ref()">Ref</button>

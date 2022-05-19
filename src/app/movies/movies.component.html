@@ -1,0 +1,10 @@
+<p>movies works!</p>
+<div class="movie-list">
+  <div *ngFor="let movie of moviesService.movies$ |async">
+    <a routerLink="./{{movie.id}}">
+      <p class="movie">
+        nazwa : {{movie.title}}
+      </p>
+    </a>
+  </div>
+</div>

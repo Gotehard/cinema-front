@@ -1,0 +1,27 @@
+section {
+  //width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+
+  .form-box {
+    border: #555 1px solid;
+    border-radius: 3px;
+    box-shadow: #5555 2px 2px;
+    padding: 50px 30px;
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      label {
+      }
+
+      input {
+        border: none;
+        border-bottom: #555 1px solid;
+      }
+    }
+
+  }
+}

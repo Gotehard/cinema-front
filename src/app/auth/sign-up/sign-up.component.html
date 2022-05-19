@@ -1,1 +1,28 @@
-<p>sign-up works!</p>
+<app-auth-form>
+  <form [formGroup]="registerForm" (submit)="onSubmit()">
+    <label for="username">
+      Username:
+    </label>
+    <input id="username" type="text" formControlName="userName">
+
+    <label for="email">
+      Email:
+    </label>
+    <input id="email" type="text" formControlName="email">
+
+    <label for="password">
+      Password:
+    </label>
+    <input id="password" type="text" formControlName="password">
+    <button type="submit">Sign up</button>
+  </form>
+</app-auth-form>
+
+<p>
+  XD: <br>
+  {{registerForm.value | json}}
+  <br>
+  status: {{registerForm.status}}
+  <br>
+  {{registerForm.value.password}}
+</p>
