@@ -13,18 +13,20 @@ import {Observable, Subject} from "rxjs";
 export class AuthService {
 
   apiUrl = environment.apiURL;
+  isLogged = false;
 
   constructor(private http: HttpClient,
               private localStore: LocalStorageService) {
   }
 
   login(credentials: Credentials) {
-    this.http.post<TokensPair>(`${this.apiUrl}/login`, credentials)
-      .subscribe(data => {
-        if (data.token && data.refreshToken) {
-          this.saveTokens(data);
-        }
-      })
+    let response = this.http.post<TokensPair>(`${this.apiUrl}/login`, credentials)
+    response.subscribe(data => {
+      if (data.token && data.refreshToken) {
+        this.saveTokens(data);
+      }
+    })
+    return response
   }
 
   signUp(user: any) {
