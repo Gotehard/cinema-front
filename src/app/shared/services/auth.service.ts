@@ -37,6 +37,13 @@ export class AuthService {
       })
   }
 
+  signOut() {
+    console.log('sign out');
+    this.localStore.remove(LocalStorageNames.TOKEN);
+    this.localStore.remove(LocalStorageNames.REFRESH_TOKEN);
+    this.isLogged.next(false);
+  }
+
   me() {
     this.http.get(`${this.apiUrl}/api/auth/me`, {responseType: 'text'})
       .subscribe(username => {

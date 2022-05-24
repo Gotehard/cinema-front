@@ -15,7 +15,6 @@ export class MainMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.isLogged.subscribe(b => {
-      console.log(b + 'XDDD')
       this.isLogged = b;
     })
   }

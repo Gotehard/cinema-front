@@ -3,5 +3,5 @@
   <a routerLink="/movies">Movies</a>
   <a *ngIf="!isLogged" routerLink="/auth/login">sign in</a>
   <a *ngIf="!isLogged" routerLink="/auth/register">sign up</a>
-  <a *ngIf="isLogged">sign out</a>
+  <a *ngIf="isLogged" routerLink="/auth/logout">sign out</a>
 </nav>
