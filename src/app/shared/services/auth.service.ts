@@ -5,7 +5,7 @@ import {TokensPair} from "../interfaces/tokens-pair";
 import {LocalStorageService} from "./local-storage.service";
 import {LocalStorageNames} from "../enums/local-storage-names";
 import {environment} from "../../../environments/environment";
-import {Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +13,11 @@ import {Observable, Subject} from "rxjs";
 export class AuthService {
 
   apiUrl = environment.apiURL;
-  isLogged: boolean = false;
+  isLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient,
               private localStore: LocalStorageService) {
+    console.count('Auth Serv')
   }
 
   login(credentials: Credentials) {
@@ -40,10 +41,13 @@ export class AuthService {
     this.http.get(`${this.apiUrl}/api/auth/me`, {responseType: 'text'})
       .subscribe(username => {
         if (username != null) {
-          console.log(username);
-          this.isLogged = true;
+          this.isLogged.next(true);
         }
       })
+  }
+
+  chILogged(bol: boolean) {
+    this.isLogged.next(bol);
   }
 
   getToken() {
@@ -57,6 +61,7 @@ export class AuthService {
   saveTokens(tokens: TokensPair) {
     this.localStore.save(LocalStorageNames.TOKEN, tokens.token);
     this.localStore.save(LocalStorageNames.REFRESH_TOKEN, tokens.refreshToken);
+    this.chILogged(true);
   }
 
   refreshToken(): Observable<TokensPair> {

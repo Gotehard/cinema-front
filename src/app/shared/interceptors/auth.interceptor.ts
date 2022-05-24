@@ -23,7 +23,6 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.log(error);
         if (error.status == 401) {
-          console.error('nie ma autoryzacji');
           return this.handle401Error(authReq, next);
         }
         return throwError(error);
@@ -32,6 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   handle401Error(req: HttpRequest<any>, next: HttpHandler) {
+    this.authService.chILogged(false);
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refTokenSubject.next(null);
@@ -49,7 +49,6 @@ export class AuthInterceptor implements HttpInterceptor {
             catchError(err => {
               this.isRefreshing = false;
               //TODO signout
-              console.warn('REF token nie działą')
               return throwError(err);
             })
           )
