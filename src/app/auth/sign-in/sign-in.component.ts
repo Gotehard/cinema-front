@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../../shared/services/auth.service";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {first} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -16,12 +18,22 @@ export class SignInComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
   }
 
   onSubmit() {
     this.authService.login(this.loginForm.value)
+      .pipe(
+        first()
+      )
+      .subscribe(d => {
+        if (d.token && d.refreshToken) {
+          this.router.navigate(['/'])
+        }
+      })
+
   }
 
   ref() {
