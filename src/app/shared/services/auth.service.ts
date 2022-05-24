@@ -13,7 +13,7 @@ import {Observable, Subject} from "rxjs";
 export class AuthService {
 
   apiUrl = environment.apiURL;
-  isLogged = false;
+  isLogged: boolean = false;
 
   constructor(private http: HttpClient,
               private localStore: LocalStorageService) {
@@ -36,6 +36,16 @@ export class AuthService {
       })
   }
 
+  me() {
+    this.http.get(`${this.apiUrl}/api/auth/me`, {responseType: 'text'})
+      .subscribe(username => {
+        if (username != null) {
+          console.log(username);
+          this.isLogged = true;
+        }
+      })
+  }
+
   getToken() {
     return this.localStore.get(LocalStorageNames.TOKEN);
   }
@@ -51,17 +61,9 @@ export class AuthService {
 
   refreshToken(): Observable<TokensPair> {
     console.log('reftoken', this.getRefreshToken())
-    // let s = new Subject<TokensPair>();
     if (!!this.getRefreshToken()) {
       return this.http.post<TokensPair>(`${this.apiUrl}/api/auth/refresh`, this.getRefreshToken());
     }
     return new Subject<TokensPair>();
-    // let con = this.http.post<TokensPair>(`${this.apiUrl}/api/auth/refresh`, this.getRefreshToken());
-    // con.subscribe(data => {
-    //   this.localStore.save(LocalStorageNames.TOKEN, data.token);
-    //   this.localStore.save(LocalStorageNames.REFRESH_TOKEN, data.refreshToken);
-    //   s.next(data);
-    // });
-    // return s;
   }
 }
