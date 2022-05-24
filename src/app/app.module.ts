@@ -9,13 +9,15 @@ import {SiteNotFoundComponent} from './shared/components/site-not-found/site-not
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
 import {InitialConfigService} from "./shared/services/initial-config.service";
+import {UnauthorizedComponent} from './shared/components/unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MainMenuComponent,
-    SiteNotFoundComponent
+    SiteNotFoundComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
